@@ -7,6 +7,7 @@ import com.shopfazz.methods.TestCaseFailed;
 import com.shopfazz.pageobjects.LoginDashboard;
 import com.shopfazz.pageobjects.ProfileDashboard;
 
+import cucumber.api.java.After;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -45,13 +46,11 @@ public void user_could_see_dashboard_title() throws TestCaseFailed {
 
 @When("^user click profile button$")
 public void user_click_profile_button() throws InterruptedException {
-	Thread.sleep(5000);
 	profilDashboard.userClickProfileButton();
 }
 
 @When("^user click logout$")
 public void user_click_logout() throws InterruptedException {
-	
 	loginObject.clickLogoutBtn();
 }
 
@@ -60,6 +59,9 @@ public void user_logged_out() throws TestCaseFailed {
 	loginObject.assertLoginPageTitle();
 }
 
-
+@After
+public void tearDown() {
+	browser.closeDriver();
+}
 	
 }

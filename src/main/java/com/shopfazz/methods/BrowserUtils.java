@@ -71,6 +71,7 @@ public class BrowserUtils extends SelectElementByType implements BaseTest {
 
 	public void navigateTo(String url) {
 		WebDriverManager.chromedriver().setup();
+//		 System.setProperty("webdriver.chrome.driver", "src/driver/chromedriver");
 		driver =  new ChromeDriver();
 	
 		
@@ -626,7 +627,7 @@ public class BrowserUtils extends SelectElementByType implements BaseTest {
 	 * @param accessName   : String : Locator value
 	 */
 	public void click(SelectorType selectorType, String accessName) {
-		element = wait.until(ExpectedConditions.presenceOfElementLocated(getElementByType(selectorType, accessName)));
+		element = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(getElementByType(selectorType, accessName)));
 		element.click();
 	}
 
@@ -1287,6 +1288,8 @@ public class BrowserUtils extends SelectElementByType implements BaseTest {
 	 * @return WebElement
 	 */
 	public WebElement getWebElement(SelectorType type, String text) {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(getElementByType(type, text)));
 		return driver.findElement(getElementByType(type, text));
 	}
 
