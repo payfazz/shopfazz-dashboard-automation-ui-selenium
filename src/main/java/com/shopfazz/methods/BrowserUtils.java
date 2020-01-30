@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -33,6 +34,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 import com.shopfazz.environment.BaseTest;
 import com.shopfazz.logger.Log;
@@ -178,6 +180,8 @@ public class BrowserUtils extends SelectElementByType implements BaseTest {
 		element = wait.until(ExpectedConditions.presenceOfElementLocated(getElementByType(selectorType, accessName)));
 		action.moveToElement(element).perform();
 	}
+	
+	
 
 	/**
 	 * Method to scroll page to particular element
@@ -655,6 +659,13 @@ public class BrowserUtils extends SelectElementByType implements BaseTest {
 		Actions action = new Actions(driver);
 		action.moveToElement(element).doubleClick().perform();
 	}
+	
+	
+//	public void doubleClick2(SelectorType selectorType, String accessValue) {
+//		WebElement element = driver.findElement(getElementByType(selectorType, accessValue));
+//		Actions actions = new Actions(driver);
+//		actions.moveToElement(element).click().build().perform();
+//	}
 
 	/////////////////////////////////////////
 	// PRINT TEST STAND CONFIGURATION METHODS
@@ -1756,4 +1767,28 @@ public class BrowserUtils extends SelectElementByType implements BaseTest {
 
 		return flag;
 	}
+	
+	public void clickLinkByHref(String href)  {
+		
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+        List<WebElement> anchors = driver.findElements(By.tagName("a"));
+        Iterator<WebElement> i = anchors.iterator();
+        
+        while(i.hasNext()) {
+       
+            WebElement anchor = i.next();
+//            System.out.println(anchor.getAttribute("href"));
+            if(anchor.getAttribute("href").equalsIgnoreCase(href)) {
+            	
+                anchor.click();
+                break;
+            }
+        }
+    }
+	
+	public void clickLinkByHref2(String elm) {
+		driver.findElement(By.linkText(elm));
+		
+      
+    }
 }

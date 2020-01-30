@@ -28,7 +28,7 @@ public class PredefinedStepDefinitions implements BaseTest {
     
     // Step to navigate to base URL
     @Given("^user already in shopfazz login page$")
-    public void navigate_to_canfazz_login_page() throws IOException {
+    public void navigate_to_shopfazz_login_page() throws IOException {
         browser.navigateTo(props.getProperty("baseUrl"));
     }
 
