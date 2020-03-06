@@ -1,6 +1,9 @@
 package com.shopfazz.pageobjects;
 
 import static com.shopfazz.methods.SelectorType.CSS;
+import static com.shopfazz.methods.SelectorType.ID;
+import static com.shopfazz.methods.SelectorType.NAME;
+import static com.shopfazz.methods.SelectorType.XPATH;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,48 +19,29 @@ import com.shopfazz.logger.Log;
 import com.shopfazz.methods.SelectorType;
 import com.shopfazz.methods.TestCaseFailed;
 
-import static com.shopfazz.methods.SelectorType.ID;
-import static com.shopfazz.methods.SelectorType.NAME;
-import static com.shopfazz.methods.SelectorType.XPATH;
-
-import java.util.List;
-
-import static com.shopfazz.methods.SelectorType.CSS;
-
-import org.junit.*;
-
 //import java.sql.Connection;
 //import java.sql.PreparedStatement;
 //import java.sql.ResultSet;
 //import java.sql.SQLException;
 
+import java.util.List;
+import org.junit.*;
+
 public class LoginDashboard implements BaseTest {
 	
-	
 	private static String env = System.getProperty("environment");
-	
 	private String email = "email";
-
 	private String pwd = "password";
-
 	private String btnLogin = "//*[@id=\"root\"]/div/div/form/div[3]/div/div/span/button";
-
 	private String titleDashboard = "//*[@id=\"root\"]/div/div[1]/div/div[2]/span";
-	
-	private String titleLogin = "#root > div > div > h1";
-	
-	private String btn_toggle_password = "//*[@id=\"root\"]/div/div[1]/div/div[3]/a/span[3]/i/svg/path";
-	
-	private String btnLogout = "/html/body/div[3]/div/div/ul/li[3]";
-	
+	private String btn_toggle_password = "//*[@id=\"root\"]/div/div/form/div[2]/div/div/span/span/span/span/i";
+	private String alertInvalidCredential = "/html/body/div[2]/div/span/div/div/div/span";
 	private static String userLogin = "";
-	
 //	private static String accCode = "";
 	
-
+	
 	/*SETTER GETTER*/
 	public String getEmail() {
-		
 		return email;
 	}
 
@@ -88,7 +72,8 @@ public class LoginDashboard implements BaseTest {
 //		browser.waitForElementToDisplay(XPATH, alertInvalidCredential, "5");
 //	}
 //
-	public void clickDropDown() {
+	
+	public void clickBtnTogglePassword() {
 		browser.click(XPATH, btn_toggle_password);
 	}
 
@@ -127,25 +112,17 @@ public class LoginDashboard implements BaseTest {
 		Log.INFO("Click Login Button");
 		browser.click(XPATH, btnLogin);
 	}
+	
+	public void LoginBtnDisable() throws TestCaseFailed {
+		Log.INFO("Click Login Button");
+		browser.isElementEnabled(XPATH, btnLogin);
+		Assert.assertEquals(false, browser.isElementEnabled(XPATH, btnLogin));
+	}
 
 	public void assertDashboardTitle() throws TestCaseFailed {
 		Log.INFO("Verify Dashboard Title");
 		browser.checkElementPresence(XPATH, titleDashboard);
 		browser.maximizeBrowser();
-	}
-
-	public void assertLoginPageTitle() throws TestCaseFailed {
-		Log.INFO("Verify Login Page Title");
-		browser.checkElementPresence(CSS, titleLogin);
-	}
-
-	public void clickLogoutBtn() {
-		Log.INFO("Click Logout Button");
-		WebElement dropDownProfile = browser.getWebElement(XPATH, "/html/body/div[2]/div/div/ul");
-		List<WebElement> btnLogout =dropDownProfile.findElements(By.tagName("li"));
-		//WebElement elm = browser.getWebElement(XPATH, "/html/body/div[2]/div/div/ul/li[3]");
-		WebElement elm = btnLogout.get(2);
-		elm.click();
 	}
 	
 //	public void verifyAlertTextfieldUsername() {
@@ -167,6 +144,12 @@ public class LoginDashboard implements BaseTest {
 		browser.click(NAME, pwd);
 		browser.enterTextByActions(NAME, pass, pwd);
 		
+	}
+
+	public void assertInvalidCredential() {
+		// TODO Auto-generated method stub
+		Log.INFO("Verify alert invalid credential is displayed");
+		browser.waitForElementToDisplay(XPATH, alertInvalidCredential, "5");	
 	}
 	
 	
@@ -197,6 +180,4 @@ public class LoginDashboard implements BaseTest {
 //		return resultValue;
 //	}
 	
-	
-
 }

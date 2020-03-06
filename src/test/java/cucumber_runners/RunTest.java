@@ -6,8 +6,15 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class) 
-@CucumberOptions(features="classpath:features",glue="classpath:stepdefinitions", tags="@MainMenu") 
 
+// Run all test case
+//@CucumberOptions(features="classpath:features",glue="classpath:stepdefinitions") 
+
+//Run per module
+@CucumberOptions(features="classpath:features",glue="classpath:stepdefinitions",tags="@LoginDashboard,@MainMenu")
+
+// Run per test case
+//@CucumberOptions(features="classpath:features",glue="classpath:stepdefinitions",tags= {"@C25275,@C25259"}) 
 
 
 public class RunTest {
