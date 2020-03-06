@@ -6,10 +6,10 @@ import com.shopfazz.methods.TestCaseFailed;
 import com.shopfazz.pageobjects.LoginDashboard;
 import com.shopfazz.pageobjects.MainMenu;
 
-import cucumber.api.java.After;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
+import cucumber.api.java.After;
 
 
 public class MainMenuStepDefinition implements BaseTest {
