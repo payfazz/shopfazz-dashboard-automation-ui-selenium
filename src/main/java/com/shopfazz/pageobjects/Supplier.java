@@ -19,6 +19,7 @@ public class Supplier implements BaseTest {
 	
 	private String name = "//*[@id=\"root\"]/div/div[2]/div/div[1]/div[1]/div/span/input";
 	private String Btn_search = "//*[@id=\"root\"]/div/div[2]/div/div[1]/div[1]/div/span/span";
+	private String lblNoData ="//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div/div/div/div[2]";
 	private String listName ="//*[@id=\"root\"]/div/div[2]/div/div[2]/div/div/div/div/div/table/tbody/tr/td[1]";
 	
 	public void enterTextName(String searchText) throws TestCaseFailed {
@@ -30,6 +31,10 @@ public class Supplier implements BaseTest {
 	public void clickSearchButton() throws TestCaseFailed{
 		Log.INFO("Click Search Button");
 		browser.click(XPATH, Btn_search);
+	}
+	
+	public void verifyDataNotFound() {
+		assertTrue(browser.isElementDisplayed(XPATH, lblNoData));
 	}
 	
 	public void verifySupplierName() {

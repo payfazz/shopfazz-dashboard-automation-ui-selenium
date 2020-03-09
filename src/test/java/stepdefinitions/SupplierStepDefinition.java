@@ -27,13 +27,18 @@ public class SupplierStepDefinition implements BaseTest {
     public void user_click_search_button() throws Throwable {
     	supplierMenu.clickSearchButton();
     }
-
+    
+    @Then("^user will see data not found$")
+    public void user_will_see_data_not_found() throws Throwable {
+       supplierMenu.verifyDataNotFound();
+    }
+    
     @Then("^user will see supplier name$")
     public void user_will_see_supplier_name() throws Throwable {
        Thread.sleep(3000);
        supplierMenu.verifySupplierName();
     }
-	
+    
 	@After
 	public void tearDown() {
 		browser.closeDriver();
